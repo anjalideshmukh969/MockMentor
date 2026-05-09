@@ -6,6 +6,7 @@ MockMentor is an AI-powered mock interview platform designed to help students an
 
 ## 🚀 Features
 
+
 - 📄 Resume Upload & Analysis (PDF)
 - 🤖 AI-Generated Personalized Interview Questions
 - 🧠 Technical + HR Interview Simulation
@@ -87,7 +88,6 @@ The platform analyzes user input such as resumes and generates personalized inte
 - 🏆 Leaderboards & Gamification
 
 ---
-
 ## 👨‍💻 Author
 
 Developed with ❤️ by Anjali Deshmukh
