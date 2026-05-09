@@ -44,7 +44,6 @@ function Step1({ onStart }) {
             setResumeText(result.data.resumeText || "");
             setAnalysisDone(true);
             setAnalyzing(false);
-
         } catch (error) {
             console.log(error)
             setAnalyzing(false);
