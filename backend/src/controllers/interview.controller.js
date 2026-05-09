@@ -128,11 +128,9 @@ export const generateQuestion = async (req, res) => {
         role: "system",
         content: `
 You are a real human interviewer conducting a professional interview.
-
 Speak in simple, natural English as if you are directly talking to the candidate.
 
 Generate exactly 5 interview questions.
-
 Strict Rules:
 - Each question must contain between 15 and 25 words.
 - Each question must be a single complete sentence.
