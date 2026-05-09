@@ -11,7 +11,7 @@ import { useState } from 'react';
 import axios from "axios"
 import { ServerUrl } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserData } from '../redux/userSlice';
+import { setUserData } from '../redux/userSlice.js';
 function Step1({ onStart }) {
     const {userData}= useSelector((state)=>state.user)
     const dispatch = useDispatch()
@@ -25,7 +25,6 @@ function Step1({ onStart }) {
     const [resumeText, setResumeText] = useState("");
     const [analysisDone, setAnalysisDone] = useState(false);
     const [analyzing, setAnalyzing] = useState(false);
-
 
     const handleUploadResume = async () => {
         if (!resumeFile || analyzing) return;
@@ -268,4 +267,4 @@ function Step1({ onStart }) {
     )
 }
 
-export default Step1
+export default Step1;

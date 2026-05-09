@@ -14,7 +14,6 @@ function InterviewPage() {
                     setStep(2)
                  }} />
                 )}
-
             {step === 2 &&
                 (<Step2 interviewData={interviewData} 
                 onFinish={(report)=>{setInterviewData(report);

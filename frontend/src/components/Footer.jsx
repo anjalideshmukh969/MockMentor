@@ -22,6 +22,7 @@ const Footer = () => {
             icon: <FaLinkedin />,
             link: "https://linkedin.com/in/anjalideshmukh-"
         },
+
     ]
 
     return (

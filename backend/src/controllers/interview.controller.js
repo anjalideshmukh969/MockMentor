@@ -5,9 +5,10 @@ import User from "../models/user.model.js";
 import Interview from "../models/interview.model.js";
 
 export const analyzeResume = async (req, res) => {
-  try { 
+  try {
     if (!req.file) {
-      return res.status(400).json({ message: "Resume required" });
+      return res.status(400).json(
+        { message: "Resume required" });
     }
     const filepath = req.file.path
 
@@ -26,8 +27,6 @@ export const analyzeResume = async (req, res) => {
       const pageText = content.items.map(item => item.str).join(" ");
       resumeText += pageText + "\n";
     }
-
-
     resumeText = resumeText
       .replace(/\s+/g, " ")
       .trim();
@@ -37,7 +36,6 @@ export const analyzeResume = async (req, res) => {
         role: "system",
         content: `
 Extract structured data from resume.
-
 Return strictly JSON:
 
 {
@@ -80,44 +78,35 @@ Return strictly JSON:
     return res.status(500).json({ message: error.message });
   }
 };
-
-
 export const generateQuestion = async (req, res) => {
   try {
+    console.log(req.body)
+    console.log(req.userId)
     let { role, experience, mode, resumeText, projects, skills } = req.body
-
     role = role?.trim();
     experience = experience?.trim();
     mode = mode?.trim();
-
     if (!role || !experience || !mode) {
       return res.status(400).json({ message: "Role, Experience and Mode are required." })
     }
-
     const user = await User.findById(req.userId)
-
     if (!user) {
       return res.status(404).json({
         message: "User not found."
       });
     }
-
     if (user.credits < 50) {
       return res.status(400).json({
         message: "Not enough credits. Minimum 50 required."
       });
     }
-
     const projectText = Array.isArray(projects) && projects.length
       ? projects.join(", ")
       : "None";
-
     const skillsText = Array.isArray(skills) && skills.length
       ? skills.join(", ")
       : "None";
-
     const safeResume = resumeText?.trim() || "None";
-
     const userPrompt = `
     Role:${role}
     Experience:${experience}
@@ -175,7 +164,7 @@ Make questions based on the candidate’s role, experience,interviewMode, projec
     const aiResponse = await askAi(messages)
 
     if (!aiResponse || !aiResponse.trim()) {
-           
+
       return res.status(500).json({
         message: "AI returned empty response."
       });
@@ -189,7 +178,7 @@ Make questions based on the candidate’s role, experience,interviewMode, projec
       .slice(0, 5);
 
     if (questionsArray.length === 0) {
-      
+
       return res.status(500).json({
         message: "AI failed to generate questions."
       });
@@ -218,10 +207,9 @@ Make questions based on the candidate’s role, experience,interviewMode, projec
       questions: interview.questions
     });
   } catch (error) {
-    return res.status(500).json({message:`failed to create interview ${error}`})
+    return res.status(500).json({ message: `failed to create interview ${error}` })
   }
 }
-
 
 export const submitAnswer = async (req, res) => {
   try {
@@ -326,20 +314,20 @@ Answer: ${answer}
     await interview.save();
 
 
-    return res.status(200).json({feedback :parsed.feedback})
+    return res.status(200).json({ feedback: parsed.feedback })
   } catch (error) {
-    return res.status(500).json({message:`failed to submit answer ${error}`})
+    return res.status(500).json({ message: `failed to submit answer ${error}` })
 
   }
 }
 
 
-export const finishInterview = async (req,res) => {
+export const finishInterview = async (req, res) => {
   try {
-    const {interviewId} = req.body
+    const { interviewId } = req.body
     const interview = await Interview.findById(interviewId)
-    if(!interview){
-      return res.status(400).json({message:"failed to find Interview"})
+    if (!interview) {
+      return res.status(400).json({ message: "failed to find Interview" })
     }
 
     const totalQuestions = interview.questions.length;
@@ -378,7 +366,7 @@ export const finishInterview = async (req,res) => {
     await interview.save();
 
     return res.status(200).json({
-       finalScore: Number(finalScore.toFixed(1)),
+      finalScore: Number(finalScore.toFixed(1)),
       confidence: Number(avgConfidence.toFixed(1)),
       communication: Number(avgCommunication.toFixed(1)),
       correctness: Number(avgCorrectness.toFixed(1)),
@@ -392,25 +380,25 @@ export const finishInterview = async (req,res) => {
       })),
     })
   } catch (error) {
-    return res.status(500).json({message:`failed to finish Interview ${error}`})
+    return res.status(500).json({ message: `failed to finish Interview ${error}` })
   }
 }
 
 
-export const getMyInterviews = async (req,res) => {
+export const getMyInterviews = async (req, res) => {
   try {
-    const interviews = await Interview.find({userId:req.userId})
-    .sort({ createdAt: -1 })
-    .select("role experience mode finalScore status createdAt");
+    const interviews = await Interview.find({ userId: req.userId })
+      .sort({ createdAt: -1 })
+      .select("role experience mode finalScore status createdAt");
 
     return res.status(200).json(interviews)
 
   } catch (error) {
-     return res.status(500).json({message:`failed to find currentUser Interview ${error}`})
+    return res.status(500).json({ message: `failed to find currentUser Interview ${error}` })
   }
 }
 
-export const getInterviewReport = async (req,res) => {
+export const getInterviewReport = async (req, res) => {
   try {
     const interview = await Interview.findById(req.params.id)
 
@@ -442,7 +430,7 @@ export const getInterviewReport = async (req,res) => {
       ? totalCorrectness / totalQuestions
       : 0;
 
-       return res.json({
+    return res.json({
       finalScore: interview.finalScore,
       confidence: Number(avgConfidence.toFixed(1)),
       communication: Number(avgCommunication.toFixed(1)),
@@ -451,7 +439,7 @@ export const getInterviewReport = async (req,res) => {
     });
 
   } catch (error) {
-    return res.status(500).json({message:`failed to find currentUser Interview report ${error}`})
+    return res.status(500).json({ message: `failed to find currentUser Interview report ${error}` })
   }
 }
 
