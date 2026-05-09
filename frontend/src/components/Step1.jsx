@@ -32,7 +32,6 @@ function Step1({ onStart }) {
 
         const formdata = new FormData()
         formdata.append("resume", resumeFile)
-
         try {
             const result = await axios.post(ServerUrl + "/api/interview/resume", formdata, { withCredentials: true })
 
@@ -44,7 +43,6 @@ function Step1({ onStart }) {
             setSkills(result.data.skills || []);
             setResumeText(result.data.resumeText || "");
             setAnalysisDone(true);
-
             setAnalyzing(false);
 
         } catch (error) {
@@ -52,7 +50,6 @@ function Step1({ onStart }) {
             setAnalyzing(false);
         }
     }
-
     const handleStart = async () => {
         setLoading(true)
         try {
