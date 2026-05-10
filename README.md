@@ -1,6 +1,8 @@
 # 🤖 MockMentor — AI-Powered Mock Interview Platform
 
-MockMentor is an AI-powered mock interview platform designed to help students and job seekers prepare for technical and HR interviews through realistic interview simulations, personalized question generation, and intelligent performance feedback.
+MockMentor is an AI-powered mock interview platform designed to help students and job seekers prepare for technical and HR interviews through realistic interview simulations, AI-generated personalized questions, and intelligent performance feedback.
+
+The platform aims to bridge the gap between academic preparation and real-world interview experience by providing an interactive and personalized interview environment.
 
 ---
 
@@ -9,32 +11,36 @@ MockMentor is an AI-powered mock interview platform designed to help students an
 - 📄 Resume Upload & Analysis (PDF)
 - 🤖 AI-Generated Personalized Interview Questions
 - 🧠 Technical + HR Interview Simulation
-- 📊 AI-Based Performance Feedback & Evaluation
+- 📊 AI-Powered Performance Feedback
 - 🔐 Secure Google Authentication with Firebase
 - 💳 Credit-Based Usage System
-- 💰 Razorpay Payment Gateway Integration
-- 🎨 Smooth & Interactive UI using Framer Motion
-- 📱 Responsive Design for All Devices
+- 💰 Razorpay Payment Integration
+- 🎨 Smooth Animations with Framer Motion
+- 📱 Fully Responsive Modern UI
 
 ---
 
 ## 🧠 Problem Statement
 
 Many students struggle with interview preparation due to:
-- Lack of real interview experience
+- Lack of real interview exposure
 - Limited personalized guidance
-- Absence of structured feedback
+- No structured feedback mechanism
 - Low confidence during placements
 
-Traditional preparation methods often fail to simulate actual interview environments effectively.
+Traditional preparation methods often fail to simulate real interview scenarios effectively.
 
 ---
 
 ## 💡 Solution
 
-MockMentor provides an AI-driven interview preparation experience that simulates real-world interviews.
+MockMentor provides a realistic AI-driven interview preparation experience where users can:
+- Upload resumes
+- Generate personalized interview questions
+- Practice technical and HR interviews
+- Receive intelligent feedback and improvement suggestions
 
-The platform analyzes user input such as resumes and generates personalized interview questions tailored to the candidate’s profile. After each mock interview session, users receive intelligent feedback and improvement suggestions to enhance their communication, technical knowledge, and interview confidence.
+The platform helps users improve communication skills, technical understanding, and interview confidence.
 
 ---
 
@@ -42,8 +48,8 @@ The platform analyzes user input such as resumes and generates personalized inte
 
 ### 💻 Frontend
 - React.js
-- Framer Motion
 - Tailwind CSS
+- Framer Motion
 
 ### ⚙️ Backend
 - Node.js
@@ -55,25 +61,80 @@ The platform analyzes user input such as resumes and generates personalized inte
 ### 🔐 Authentication
 - Firebase Authentication (Google Sign-In)
 
-### 💳 Payment Integration
-- Razorpay
-
 ### 🤖 AI Integration
 - OpenAI API / Gemini API
+
+### 💳 Payment Gateway
+- Razorpay
 
 ### 🚀 Deployment
 - Render
 
 ---
 
-## 📌 How It Works
+# ⚙️ Installation & Setup
 
-1. User signs in using Google Authentication
-2. Uploads resume in PDF format
-3. AI analyzes the resume and generates relevant interview questions
-4. User attends mock interview sessions
-5. AI evaluates responses and provides detailed feedback
-6. Credits are used for interview sessions and can be recharged via Razorpay
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/your-username/MockMentor.git
+```
+
+---
+
+## 2️⃣ Navigate to Project Directory
+
+```bash
+cd MockMentor
+```
+
+---
+
+## 3️⃣ Install Frontend Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## 4️⃣ Setup Environment Variables
+
+Create a `.env` file in the root directory and add:
+
+```env
+MONGODB_URI=your_mongodb_uri
+FIREBASE_API_KEY=your_firebase_key
+OPENAI_API_KEY=your_openai_key
+RAZORPAY_KEY_ID=your_razorpay_key
+RAZORPAY_SECRET=your_razorpay_secret
+```
+
+---
+
+## 5️⃣ Start Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 📂 Project Structure
+
+```bash
+MockMentor/
+│
+├── client/          # Frontend
+├── server/          # Backend
+└── README.md
+```
+
+---
+
+## 📸 Screenshots
+
+_Add project screenshots here._
 
 ---
 
@@ -81,15 +142,33 @@ The platform analyzes user input such as resumes and generates personalized inte
 
 - 🎙️ Voice-Based AI Interviews
 - 📹 Video Interview Simulation
-- 📈 Detailed Performance Analytics Dashboard
+- 📈 Performance Analytics Dashboard
 - 🌍 Multi-Language Support
 - 🧑‍💼 Company-Specific Interview Preparation
-- 🏆 Leaderboards & Gamification
+- 🏆 Gamification & Leaderboards
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Push the branch
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
 ---
 
 ## 👨‍💻 Author
 
-Developed with ❤️ by Anjali Deshmukh
+Developed with ❤️ by **Anjali Deshmukh**
 
 ---
