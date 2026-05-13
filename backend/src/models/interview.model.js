@@ -11,7 +11,6 @@ const questionsSchema = new mongoose.Schema({
     communication: { type: Number, default: 0 },
     correctness: { type: Number, default: 0 },
 })
-
 const interviewSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
