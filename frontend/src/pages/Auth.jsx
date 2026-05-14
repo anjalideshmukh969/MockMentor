@@ -80,6 +80,9 @@ function Auth({ isModel = false }) {
             : '0 0 0 1px rgba(16,185,129,0.1), 0 32px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)'
         }}
       >
+
+        {/* style="background: linear-gradient(135deg, rgb(99, 102, 241), rgb(139, 92, 246)); box-shadow: 
+        rgba(99, 102, 241, 0.35) 0px 4px 20px; transform: none;" */}
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
