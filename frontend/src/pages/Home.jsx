@@ -12,19 +12,16 @@ import {
   BsLightningCharge,
   BsShieldCheck
 } from "react-icons/bs";
-
 import {
   HiSparkles,
   HiMiniCpuChip
 } from "react-icons/hi2";
-
 import {
   FaBrain,
   FaMicrophoneAlt,
   FaChartLine,
   FaRocket
 } from "react-icons/fa";
-
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AuthModel from '../components/AuthModel';
@@ -40,613 +37,404 @@ import analyticsImg from "../assets/history.png";
 
 import Footer from '../components/Footer';
 
+/* ─── Design tokens ──────────────────────────────────────────── */
+const C = {
+  bg: '#04080f',
+  surface: 'rgba(255,255,255,0.04)',
+  surfaceBright: 'rgba(255,255,255,0.07)',
+  border: 'rgba(255,255,255,0.07)',
+  borderGreen: 'rgba(16,185,129,0.25)',
+  accent: '#10b981',
+  accentDim: 'rgba(16,185,129,0.15)',
+  text: '#f0faf6',
+  muted: 'rgba(255,255,255,0.42)',
+  faint: 'rgba(255,255,255,0.14)',
+}
+
+const pill = (children, extra = {}) => (
+  <span style={{
+    display: 'inline-flex', alignItems: 'center', gap: 6,
+    background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.22)',
+    borderRadius: 100, padding: '5px 14px',
+    fontSize: 12, fontWeight: 600, color: C.accent, ...extra
+  }}>{children}</span>
+)
+
 function Home() {
-
   const { userData } = useSelector((state) => state.user)
-
   const [showAuth, setShowAuth] = useState(false);
-
   const navigate = useNavigate()
 
+  const guard = (path) => {
+    if (!userData) { setShowAuth(true); return; }
+    navigate(path)
+  }
+
   return (
+    <div style={{
+      minHeight: '100vh', background: C.bg, color: C.text,
+      fontFamily: "'DM Sans', 'Segoe UI', system-ui, sans-serif",
+      overflowX: 'hidden', position: 'relative'
+    }}>
 
-    <div className='min-h-screen bg-[#f8fbf8] flex flex-col overflow-hidden relative'>
-
-      {/* Animated Background */}
-
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.08, 0.15, 0.08]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity
-        }}
-        className='absolute top-[-120px] left-[-120px] w-[320px] h-[320px] bg-green-300 rounded-full blur-3xl'
-      />
-
-      <motion.div
-        animate={{
-          scale: [1, 1.4, 1],
-          opacity: [0.05, 0.12, 0.05]
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity
-        }}
-        className='absolute bottom-[-120px] right-[-120px] w-[380px] h-[380px] bg-emerald-200 rounded-full blur-3xl'
-      />
-
-      {/* Floating Particles */}
-
-      {
-        [...Array(15)].map((_, i) => (
-
-          <motion.div
-            key={i}
-
-            animate={{
-              y: [0, -25, 0],
-              opacity: [0.2, 0.8, 0.2]
-            }}
-
-            transition={{
-              duration: 3 + i,
-              repeat: Infinity
-            }}
-
-            className='absolute w-2 h-2 bg-green-400 rounded-full opacity-20'
-
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`
-            }}
-          />
-        ))
-      }
+      {/* ── Ambient glow layers ──────────────────────────── */}
+      <div style={{
+        position: 'fixed', top: '-30%', left: '-20%',
+        width: 800, height: 800,
+        background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 65%)',
+        pointerEvents: 'none', zIndex: 0
+      }} />
+      <div style={{
+        position: 'fixed', bottom: '-30%', right: '-20%',
+        width: 900, height: 900,
+        background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%)',
+        pointerEvents: 'none', zIndex: 0
+      }} />
+      {/* Subtle grid */}
+      <div style={{
+        position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none',
+        backgroundImage: `linear-gradient(${C.faint} 1px,transparent 1px),linear-gradient(90deg,${C.faint} 1px,transparent 1px)`,
+        backgroundSize: '80px 80px', opacity: 0.18
+      }} />
 
       <Navbar />
 
-      <div className='flex-1 px-6 py-20 relative z-10'>
+      <div style={{ position: 'relative', zIndex: 1 }}>
 
-        <div className='max-w-7xl mx-auto'>
-
-          {/* TOP BADGE */}
+        {/* ════════════════════════════════════════════════
+            HERO
+        ════════════════════════════════════════════════ */}
+        <section style={{ padding: '100px 24px 120px', maxWidth: 1100, margin: '0 auto', textAlign: 'center' }}>
 
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-
-            className='flex justify-center mb-8'
+            transition={{ duration: 0.5 }}
+            style={{ marginBottom: 28 }}
           >
-
-            <div className='bg-white border border-green-100 shadow-md px-5 py-3 rounded-full flex items-center gap-3'>
-
-              <motion.div
-                animate={{
-                  rotate: [0, 10, -10, 0]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity
-                }}
-              >
-                <HiSparkles className='text-green-600 text-xl' />
-              </motion.div>
-
-              <span className='text-gray-700 font-medium text-sm md:text-base'>
-                AI Powered Smart Interview Platform
-              </span>
-
-            </div>
-
+            {pill(<><HiMiniCpuChip size={13} />AI Engine Active</>)}
           </motion.div>
 
-          {/* HERO SECTION */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.05 }}
+            style={{
+              fontSize: 'clamp(40px, 7vw, 84px)',
+              fontWeight: 900,
+              lineHeight: 1.06,
+              letterSpacing: '-2px',
+              marginBottom: 24,
+              color: '#fff'
+            }}
+          >
+            Crack Interviews with{' '}
+            <span style={{
+              background: 'linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
+            }}>
+              AI Intelligence
+            </span>
+          </motion.h1>
 
-          <div className='text-center mb-32 relative'>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            style={{
+              fontSize: 18, lineHeight: 1.75, color: C.muted,
+              maxWidth: 600, margin: '0 auto 48px'
+            }}
+          >
+            Next-generation AI interviews with adaptive questioning, voice analysis,
+            resume intelligence, confidence tracking, and real-time evaluation.
+          </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-              className='inline-flex items-center gap-2 bg-green-100 text-green-700 px-5 py-2 rounded-full mb-6 shadow-sm'
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.22 }}
+            style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 72 }}
+          >
+            <motion.button
+              onClick={() => guard("/interview")}
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 10,
+                padding: '15px 36px',
+                background: 'linear-gradient(135deg, #10b981, #059669)',
+                border: 'none', borderRadius: 100,
+                fontSize: 15, fontWeight: 700, color: '#fff',
+                cursor: 'pointer',
+                boxShadow: '0 0 32px rgba(16,185,129,0.35), 0 4px 16px rgba(0,0,0,0.3)'
+              }}
             >
-              <HiMiniCpuChip />
-              AI Engine Active
-            </motion.div>
+              <FaRocket size={14} /> Start AI Interview
+            </motion.button>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-
-              className='text-5xl md:text-7xl font-black leading-tight max-w-5xl mx-auto'
+            <motion.button
+              onClick={() => guard("/history")}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                padding: '15px 36px',
+                background: C.surfaceBright, backdropFilter: 'blur(12px)',
+                border: `1px solid ${C.border}`, borderRadius: 100,
+                fontSize: 15, fontWeight: 600, color: C.text,
+                cursor: 'pointer'
+              }}
             >
+              View Analytics
+            </motion.button>
+          </motion.div>
 
-              Crack Interviews with{" "}
-
-              <span className='relative inline-block'>
-
-                <span className='bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent'>
-                  AI Intelligence
-                </span>
-
-                <motion.div
-                  animate={{
-                    width: ["0%", "100%", "0%"]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity
-                  }}
-                  className='absolute bottom-0 left-0 h-2 bg-green-200 rounded-full'
-                />
-
-              </span>
-
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-
-              className='text-gray-500 mt-8 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed'
-            >
-
-              Experience next-generation AI interviews with adaptive questioning,
-              voice analysis, resume intelligence, confidence tracking,
-              and real-time performance evaluation.
-
-            </motion.p>
-
-            {/* Buttons */}
-
-            <div className='flex flex-wrap justify-center gap-5 mt-12'>
-
-              <motion.button
-
-                onClick={() => {
-                  if (!userData) {
-                    setShowAuth(true)
-                    return;
-                  }
-
-                  navigate("/interview")
+          {/* Stats row */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 16, maxWidth: 720, margin: '0 auto' }}>
+            {[
+              { value: "10K+", label: "AI Questions" },
+              { value: "95%", label: "Accuracy Rate" },
+              { value: "24/7", label: "AI Support" },
+              { value: "5+", label: "Interview Modes" },
+            ].map((s, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.07 }}
+                whileHover={{ y: -4, scale: 1.03 }}
+                style={{
+                  background: C.surface, border: `1px solid ${C.border}`,
+                  borderRadius: 20, padding: '22px 16px',
+                  backdropFilter: 'blur(12px)'
                 }}
-
-                whileHover={{
-                  scale: 1.05,
-                  y: -3
-                }}
-
-                whileTap={{
-                  scale: 0.96
-                }}
-
-                className='relative overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600
-                text-white px-10 py-4 rounded-full shadow-xl font-semibold'
               >
-
-                <motion.div
-                  animate={{
-                    x: ["-100%", "200%"]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity
-                  }}
-                  className='absolute inset-0 bg-white/20 skew-x-12'
-                />
-
-                <span className='relative z-10 flex items-center gap-2'>
-                  <FaRocket />
-                  Start AI Interview
-                </span>
-
-              </motion.button>
-
-              <motion.button
-
-                onClick={() => {
-                  if (!userData) {
-                    setShowAuth(true)
-                    return;
-                  }
-
-                  navigate("/history")
-                }}
-
-                whileHover={{
-                  scale: 1.04,
-                  y: -2
-                }}
-
-                whileTap={{
-                  scale: 0.97
-                }}
-
-                className='border border-green-200 bg-white
-                px-10 py-4 rounded-full shadow-md hover:bg-green-50 transition'
-              >
-
-                View Analytics
-
-              </motion.button>
-
-            </div>
-
-            {/* LIVE STATS */}
-
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-16 max-w-5xl mx-auto'>
-
-              {
-                [
-                  { value: "10K+", label: "AI Questions" },
-                  { value: "95%", label: "Accuracy" },
-                  { value: "24/7", label: "AI Support" },
-                  { value: "5+", label: "Interview Modes" },
-                ].map((item, index) => (
-
-                  <motion.div
-                    key={index}
-
-                    whileHover={{
-                      y: -5,
-                      scale: 1.03
-                    }}
-
-                    className='bg-white border border-green-100 rounded-3xl p-6 shadow-md'
-                  >
-
-                    <h2 className='text-3xl font-black text-green-600'>
-                      {item.value}
-                    </h2>
-
-                    <p className='text-sm text-gray-500 mt-2'>
-                      {item.label}
-                    </p>
-
-                  </motion.div>
-                ))
-              }
-
-            </div>
-
+                <div style={{ fontSize: 30, fontWeight: 800, color: C.accent, letterSpacing: '-1px' }}>{s.value}</div>
+                <div style={{ fontSize: 13, color: C.muted, marginTop: 4 }}>{s.label}</div>
+              </motion.div>
+            ))}
           </div>
+        </section>
 
-          {/* PROCESS SECTION */}
+        {/* ════════════════════════════════════════════════
+            PROCESS STEPS
+        ════════════════════════════════════════════════ */}
+        <section style={{ padding: '0 24px 120px', maxWidth: 1100, margin: '0 auto' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            style={{ textAlign: 'center', marginBottom: 64 }}
+          >
+            <h2 style={{ fontSize: 'clamp(32px,5vw,52px)', fontWeight: 900, letterSpacing: '-1.5px', color: '#fff' }}>
+              How It <span style={{ color: C.accent }}>Works</span>
+            </h2>
+          </motion.div>
 
-          <div className='flex flex-col md:flex-row justify-center items-center gap-10 mb-32'>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))',
+            gap: 24, alignItems: 'start'
+          }}>
+            {[
+              { icon: <BsRobot size={22} />, step: "01", title: "Role & Experience", desc: "AI dynamically adjusts interview difficulty based on your role and experience level." },
+              { icon: <BsMic size={22} />, step: "02", title: "Voice Interview", desc: "Real-time adaptive questions with intelligent AI-powered conversation flow." },
+              { icon: <BsClock size={22} />, step: "03", title: "Smart Report", desc: "Detailed analytics, confidence scores, and actionable improvement feedback." },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                whileHover={{ y: -6 }}
+                style={{
+                  background: C.surface, backdropFilter: 'blur(16px)',
+                  border: `1px solid ${C.border}`, borderRadius: 28,
+                  padding: '36px 32px', position: 'relative', overflow: 'hidden'
+                }}
+              >
+                {/* Glow top-right */}
+                <div style={{
+                  position: 'absolute', top: -40, right: -40, width: 120, height: 120,
+                  background: 'radial-gradient(circle, rgba(16,185,129,0.12), transparent 70%)',
+                  borderRadius: '50%'
+                }} />
+                <div style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  width: 52, height: 52,
+                  background: 'linear-gradient(135deg, #10b981, #059669)',
+                  borderRadius: 16, marginBottom: 20,
+                  boxShadow: '0 0 20px rgba(16,185,129,0.3)'
+                }}>
+                  {React.cloneElement(item.icon, { color: '#fff' })}
+                </div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: C.accent, letterSpacing: 2, marginBottom: 8 }}>STEP {item.step}</div>
+                <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 10 }}>{item.title}</h3>
+                <p style={{ fontSize: 14, lineHeight: 1.7, color: C.muted }}>{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-            {
-              [
-                {
-                  icon: <BsRobot size={24} />,
-                  step: "STEP 1",
-                  title: "Role & Experience Selection",
-                  desc: "AI dynamically adjusts interview difficulty based on role and experience."
-                },
-                {
-                  icon: <BsMic size={24} />,
-                  step: "STEP 2",
-                  title: "Real-Time Voice Interview",
-                  desc: "Adaptive follow-up questions with AI-powered interaction."
-                },
-                {
-                  icon: <BsClock size={24} />,
-                  step: "STEP 3",
-                  title: "Smart Evaluation Report",
-                  desc: "Detailed analytics, confidence score and improvement feedback."
-                }
-              ].map((item, index) => (
+        {/* ════════════════════════════════════════════════
+            AI CAPABILITIES
+        ════════════════════════════════════════════════ */}
+        <section style={{ padding: '0 24px 120px', maxWidth: 1100, margin: '0 auto' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            style={{ textAlign: 'center', marginBottom: 64 }}
+          >
+            <h2 style={{ fontSize: 'clamp(32px,5vw,52px)', fontWeight: 900, letterSpacing: '-1.5px', color: '#fff' }}>
+              Advanced AI <span style={{ color: C.accent }}>Capabilities</span>
+            </h2>
+          </motion.div>
 
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 20 }}>
+            {[
+              { image: evalImg, icon: <BsBarChart size={18} />, title: "AI Answer Evaluation", desc: "Analyze technical accuracy, communication clarity, and confidence in real-time." },
+              { image: resumeImg, icon: <BsFileEarmarkText size={18} />, title: "Resume Intelligence", desc: "AI generates personalized questions directly from your projects and skills." },
+              { image: pdfImg, icon: <BsShieldCheck size={18} />, title: "Professional PDF Reports", desc: "Download detailed interview analytics with a comprehensive improvement roadmap." },
+              { image: analyticsImg, icon: <BsLightningCharge size={18} />, title: "Live Performance Analytics", desc: "Track growth trends, strengths, weaknesses, and full interview history." },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                style={{
+                  background: C.surface, backdropFilter: 'blur(16px)',
+                  border: `1px solid ${C.border}`, borderRadius: 28,
+                  padding: '32px', overflow: 'hidden', position: 'relative',
+                  transition: 'box-shadow 0.3s ease',
+                }}
+              >
+                {/* shimmer */}
                 <motion.div
-
-                  key={index}
-
-                  initial={{ opacity: 0, y: 60 }}
-
-                  whileInView={{ opacity: 1, y: 0 }}
-
-                  transition={{
-                    duration: 0.7,
-                    delay: index * 0.2
+                  animate={{ x: ['-120%', '220%'] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                  style={{
+                    position: 'absolute', inset: 0, zIndex: 0,
+                    background: 'linear-gradient(90deg, transparent, rgba(16,185,129,0.04), transparent)',
+                    transform: 'skewX(-12deg)'
                   }}
-
-                  whileHover={{
-                    scale: 1.05,
-                    rotate: 0
-                  }}
-
-                  className={`
-                    relative bg-white rounded-[32px]
-                    border border-green-100
-                    p-10 w-80 max-w-[90%]
-                    shadow-xl hover:shadow-2xl
-                    transition-all duration-300
-
-                    ${index === 0 ? "rotate-[-4deg]" : ""}
-                    ${index === 1 ? "rotate-[3deg] md:-mt-8" : ""}
-                    ${index === 2 ? "rotate-[-3deg]" : ""}
-                  `}
-                >
-
-                  <motion.div
-
-                    animate={{
-                      y: [0, -8, 0]
-                    }}
-
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity
-                    }}
-
-                    className='absolute -top-8 left-1/2 -translate-x-1/2
-                    bg-gradient-to-r from-green-500 to-emerald-600
-                    text-white w-16 h-16 rounded-2xl
-                    flex items-center justify-center shadow-xl'
-                  >
-
-                    {item.icon}
-
-                  </motion.div>
-
-                  <div className='pt-10 text-center'>
-
-                    <div className='text-xs text-green-600 font-bold tracking-wider mb-3'>
-                      {item.step}
-                    </div>
-
-                    <h3 className='font-bold mb-4 text-xl text-gray-800'>
-                      {item.title}
-                    </h3>
-
-                    <p className='text-sm text-gray-500 leading-relaxed'>
-                      {item.desc}
-                    </p>
-
+                />
+                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 20 }}>
+                  <img src={item.image} alt={item.title} style={{ width: '100%', maxHeight: 180, objectFit: 'contain' }} />
+                  <div>
+                    <div style={{
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      width: 44, height: 44, background: C.accentDim,
+                      border: `1px solid ${C.borderGreen}`,
+                      borderRadius: 12, marginBottom: 12, color: C.accent
+                    }}>{item.icon}</div>
+                    <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 8 }}>{item.title}</h3>
+                    <p style={{ fontSize: 14, lineHeight: 1.65, color: C.muted }}>{item.desc}</p>
                   </div>
-
-                </motion.div>
-              ))
-            }
-
+                </div>
+              </motion.div>
+            ))}
           </div>
+        </section>
 
-          {/* AI FEATURES */}
+        {/* ════════════════════════════════════════════════
+            INTERVIEW MODES
+        ════════════════════════════════════════════════ */}
+        <section style={{ padding: '0 24px 120px', maxWidth: 1100, margin: '0 auto' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            style={{ textAlign: 'center', marginBottom: 64 }}
+          >
+            <h2 style={{ fontSize: 'clamp(32px,5vw,52px)', fontWeight: 900, letterSpacing: '-1.5px', color: '#fff' }}>
+              Multiple Interview <span style={{ color: C.accent }}>Modes</span>
+            </h2>
+          </motion.div>
 
-          <div className='mb-32'>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 20 }}>
+            {[
+              { img: hrImg, title: "HR Interview Mode", desc: "Behavioral and communication-focused AI evaluation tailored for HR rounds." },
+              { img: techImg, title: "Technical Mode", desc: "Role-specific deep technical assessments with adaptive difficulty." },
+              { img: confidenceImg, title: "Confidence Detection", desc: "AI analyzes tone, hesitation, pacing, and speaking confidence in real-time." },
+              { img: creditImg, title: "Smart Credit System", desc: "Unlock premium AI interviews and features with a transparent credit system." },
+            ].map((mode, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -6 }}
+                style={{
+                  background: C.surface, backdropFilter: 'blur(16px)',
+                  border: `1px solid ${C.border}`, borderRadius: 28,
+                  padding: '28px 32px',
+                  display: 'flex', alignItems: 'center', gap: 20,
+                  justifyContent: 'space-between'
+                }}
+              >
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 8 }}>{mode.title}</h3>
+                  <p style={{ fontSize: 13, lineHeight: 1.65, color: C.muted }}>{mode.desc}</p>
+                </div>
+                <motion.img
+                  src={mode.img}
+                  alt={mode.title}
+                  whileHover={{ scale: 1.08, rotate: 3 }}
+                  style={{ width: 80, height: 80, objectFit: 'contain', flexShrink: 0 }}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-
-              className='text-5xl font-black text-center mb-20'
+        {/* ════════════════════════════════════════════════
+            CTA BANNER
+        ════════════════════════════════════════════════ */}
+        <section style={{ padding: '0 24px 120px', maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            style={{
+              background: 'linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.06))',
+              border: `1px solid ${C.borderGreen}`,
+              borderRadius: 32, padding: '60px 40px',
+              position: 'relative', overflow: 'hidden'
+            }}
+          >
+            <div style={{
+              position: 'absolute', top: -60, right: -60, width: 200, height: 200,
+              background: 'radial-gradient(circle, rgba(16,185,129,0.15), transparent 70%)',
+              borderRadius: '50%'
+            }} />
+            <h2 style={{ fontSize: 'clamp(26px,4vw,44px)', fontWeight: 900, color: '#fff', letterSpacing: '-1px', marginBottom: 16 }}>
+              Ready to ace your next interview?
+            </h2>
+            <p style={{ color: C.muted, fontSize: 16, marginBottom: 36 }}>
+              Join thousands of candidates who've leveled up with MockMentor AI.
+            </p>
+            <motion.button
+              onClick={() => guard("/interview")}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 10,
+                padding: '16px 40px',
+                background: 'linear-gradient(135deg, #10b981, #059669)',
+                border: 'none', borderRadius: 100,
+                fontSize: 16, fontWeight: 700, color: '#fff',
+                cursor: 'pointer',
+                boxShadow: '0 0 40px rgba(16,185,129,0.4)'
+              }}
             >
-
-              Advanced AI{" "}
-
-              <span className='text-green-600'>
-                Capabilities
-              </span>
-
-            </motion.h2>
-
-            <div className='grid md:grid-cols-2 gap-10'>
-
-              {
-                [
-                  {
-                    image: evalImg,
-                    icon: <BsBarChart size={20} />,
-                    title: "AI Answer Evaluation",
-                    desc: "Analyze technical accuracy, communication and confidence in real-time."
-                  },
-                  {
-                    image: resumeImg,
-                    icon: <BsFileEarmarkText size={20} />,
-                    title: "Resume Intelligence",
-                    desc: "AI generates personalized questions from your projects and skills."
-                  },
-                  {
-                    image: pdfImg,
-                    icon: <BsShieldCheck size={20} />,
-                    title: "Professional PDF Reports",
-                    desc: "Download detailed interview analytics and improvement roadmap."
-                  },
-                  {
-                    image: analyticsImg,
-                    icon: <BsLightningCharge size={20} />,
-                    title: "Live Performance Analytics",
-                    desc: "Track growth trends, strengths, weaknesses and interview history."
-                  }
-                ].map((item, index) => (
-
-                  <motion.div
-
-                    key={index}
-
-                    initial={{ opacity: 0, y: 30 }}
-
-                    whileInView={{ opacity: 1, y: 0 }}
-
-                    whileHover={{
-                      scale: 1.03
-                    }}
-
-                    className='group bg-white border border-green-100 rounded-[32px]
-                    p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden relative'
-                  >
-
-                    <motion.div
-                      animate={{
-                        x: ["-100%", "200%"]
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity
-                      }}
-                      className='absolute inset-0 bg-gradient-to-r from-transparent via-green-100/30 to-transparent'
-                    />
-
-                    <div className='flex flex-col md:flex-row items-center gap-8 relative z-10'>
-
-                      <motion.div
-                        whileHover={{
-                          rotate: 3,
-                          scale: 1.05
-                        }}
-                        className='w-full md:w-1/2 flex justify-center'
-                      >
-
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className='w-full h-auto object-contain max-h-64'
-                        />
-
-                      </motion.div>
-
-                      <div className='w-full md:w-1/2'>
-
-                        <div className='bg-green-100 text-green-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm'>
-                          {item.icon}
-                        </div>
-
-                        <h3 className='font-bold mb-4 text-2xl text-gray-800'>
-                          {item.title}
-                        </h3>
-
-                        <p className='text-gray-500 text-sm leading-relaxed'>
-                          {item.desc}
-                        </p>
-
-                      </div>
-
-                    </div>
-
-                  </motion.div>
-                ))
-              }
-
-            </div>
-
-          </div>
-
-          {/* INTERVIEW MODES */}
-
-          <div className='mb-32'>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-
-              className='text-5xl font-black text-center mb-20'
-            >
-
-              Multiple Interview{" "}
-
-              <span className='text-green-600'>
-                Modes
-              </span>
-
-            </motion.h2>
-
-            <div className='grid md:grid-cols-2 gap-10'>
-
-              {
-                [
-                  {
-                    img: hrImg,
-                    title: "HR Interview Mode",
-                    desc: "Behavioral and communication-focused AI evaluation."
-                  },
-                  {
-                    img: techImg,
-                    title: "Technical Interview Mode",
-                    desc: "Role-specific deep technical assessments."
-                  },
-                  {
-                    img: confidenceImg,
-                    title: "Confidence Detection",
-                    desc: "AI analyzes tone, hesitation and speaking confidence."
-                  },
-                  {
-                    img: creditImg,
-                    title: "Smart Credit System",
-                    desc: "Unlock premium AI interviews with credits."
-                  }
-                ].map((mode, index) => (
-
-                  <motion.div
-
-                    key={index}
-
-                    initial={{ opacity: 0, y: 30 }}
-
-                    whileInView={{ opacity: 1, y: 0 }}
-
-                    whileHover={{
-                      y: -8,
-                      scale: 1.02
-                    }}
-
-                    className='bg-white border border-green-100 rounded-[32px]
-                    p-8 shadow-lg hover:shadow-2xl transition-all duration-300'
-                  >
-
-                    <div className='flex items-center justify-between gap-6'>
-
-                      <div className='w-1/2'>
-
-                        <h3 className='font-bold text-2xl mb-4 text-gray-800'>
-                          {mode.title}
-                        </h3>
-
-                        <p className='text-gray-500 text-sm leading-relaxed'>
-                          {mode.desc}
-                        </p>
-
-                      </div>
-
-                      <motion.div
-                        whileHover={{
-                          rotate: 5,
-                          scale: 1.08
-                        }}
-                        className='w-1/2 flex justify-end'
-                      >
-
-                        <img
-                          src={mode.img}
-                          alt={mode.title}
-                          className='w-32 h-32 object-contain'
-                        />
-
-                      </motion.div>
-
-                    </div>
-
-                  </motion.div>
-                ))
-              }
-
-            </div>
-
-          </div>
-
-        </div>
+              <FaRocket size={14} /> Start Free Interview
+            </motion.button>
+          </motion.div>
+        </section>
 
       </div>
 
       {showAuth && <AuthModel onClose={() => setShowAuth(false)} />}
-
       <Footer />
-
     </div>
   )
 }
