@@ -14,7 +14,11 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin : "http://localhost:5173",
+    origin: ["http://localhost:5173",
+        "https://mock-mentor-l6tu314s4-anjali-deshmukhs-projects.vercel.app",
+        "https://mock-mentor-git-main-anjali-deshmukhs-projects.vercel.app",
+        "https://mock-mentor-phi.vercel.app"
+    ],
     credentials: true
 }))
 
