@@ -178,7 +178,8 @@ function Step1({ onStart }) {
                         <div className='relative'>
                             <FaUserTie className='absolute top-4 left-4' style={{ color: 'rgba(129,140,248,0.6)' }} />
                             <input
-                                type='text' placeholder='Enter role (e.g. Frontend Developer)'
+                                list="roleOptions"
+                                type='text' placeholder='Enter role (e.g. AI Engineer)'
                                 value={role} onChange={(e) => setRole(e.target.value)}
                                 className='w-full pl-12 pr-4 py-3.5 rounded-xl outline-none transition-all font-medium'
                                 style={{
@@ -189,26 +190,48 @@ function Step1({ onStart }) {
                                 }}
                                 onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.6)'; e.target.style.background = 'rgba(99,102,241,0.07)'; e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)' }}
                                 onBlur={e => { e.target.style.borderColor = 'rgba(99,102,241,0.2)'; e.target.style.background = 'rgba(255,255,255,0.04)'; e.target.style.boxShadow = 'none' }}
-                            />
+                                />
                         </div>
 
                         {/* Experience input */}
                         <div className='relative'>
                             <FaBriefcase className='absolute top-4 left-4' style={{ color: 'rgba(129,140,248,0.6)' }} />
-                            <input
-                                type='text' placeholder='Experience (e.g. 2 years)'
-                                value={experience} onChange={(e) => setExperience(e.target.value)}
+
+                            <select
+                                value={experience}
+                                onChange={(e) => setExperience(e.target.value)}
                                 className='w-full pl-12 pr-4 py-3.5 rounded-xl outline-none transition-all font-medium'
                                 style={{
                                     background: 'rgba(255,255,255,0.04)',
                                     border: '1px solid rgba(99,102,241,0.2)',
                                     color: '#fff',
                                     fontSize: '14px',
+                                    appearance: 'none',
                                 }}
-                                onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.6)'; e.target.style.background = 'rgba(99,102,241,0.07)'; e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)' }}
-                                onBlur={e => { e.target.style.borderColor = 'rgba(99,102,241,0.2)'; e.target.style.background = 'rgba(255,255,255,0.04)'; e.target.style.boxShadow = 'none' }}
-                            />
+                                onFocus={e => {
+                                    e.target.style.borderColor = 'rgba(99,102,241,0.6)'
+                                    e.target.style.background = 'rgba(99,102,241,0.07)'
+                                    e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)'
+                                }}
+                                onBlur={e => {
+                                    e.target.style.borderColor = 'rgba(99,102,241,0.2)'
+                                    e.target.style.background = 'rgba(255,255,255,0.04)'
+                                    e.target.style.boxShadow = 'none'
+                                }}
+                            >
+                                <option value="" disabled style={{ background: '#0a0a1a' }}>
+                                    Select Experience
+                                </option>
+                                <option value="Fresher" style={{ background: '#0a0a1a' }}>Fresher</option>
+                                <option value="0-1 Years" style={{ background: '#0a0a1a' }}>0-1 Years</option>
+                                <option value="1-3 Years" style={{ background: '#0a0a1a' }}>1-3 Years</option>
+                                <option value="3-6 Years" style={{ background: '#0a0a1a' }}>3-6 Years</option>
+                                <option value="5+ Years" style={{ background: '#0a0a1a' }}>5+ Years</option>
+                                <option value="10+ Years" style={{ background: '#0a0a1a' }}>10+ Years</option>
+                            </select>
                         </div>
+
+
 
                         {/* Mode select */}
                         <select
