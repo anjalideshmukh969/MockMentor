@@ -14,13 +14,11 @@ import { setUserData } from '../redux/userSlice'
 function Auth({ isModel = false }) {
     const dispatch = useDispatch()
 
-    // ── UI state ──
-    const [mode, setMode] = useState('login')       // 'login' | 'signup'
+    const [mode, setMode] = useState('login')
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
-    // ── Form fields ──
     const [form, setForm] = useState({ name: '', email: '', password: '' })
 
     const handleChange = (e) => {
@@ -28,7 +26,6 @@ function Auth({ isModel = false }) {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    // ── Google sign-in (original logic, unchanged) ──
     const handleGoogleAuth = async () => {
         try {
             setLoading(true)
@@ -50,7 +47,6 @@ function Auth({ isModel = false }) {
         }
     }
 
-    // ── Email / password auth ──
     const handleEmailAuth = async (e) => {
         e.preventDefault()
         setError('')
@@ -83,7 +79,6 @@ function Auth({ isModel = false }) {
         setForm({ name: '', email: '', password: '' })
     }
 
-    // ── Shared style helpers ──
     const isLight = isModel
     const textPrimary   = isLight ? '#111827'             : '#fff'
     const textMuted     = isLight ? '#6b7280'             : 'rgba(255,255,255,0.38)'
@@ -99,10 +94,24 @@ function Auth({ isModel = false }) {
         borderRadius: '12px',
         background: inputBg,
         border: `1px solid ${inputBorder}`,
-        color: textPrimary,
+        color: '#ffffff',
         fontSize: '14px',
         outline: 'none',
         transition: 'all 0.2s',
+    }
+
+    const handleFocus = (e) => {
+        e.target.style.borderColor = 'rgba(99,102,241,0.6)'
+        e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)'
+        e.target.style.background = 'rgba(99,102,241,0.07)'
+        e.target.style.color = '#ffffff'
+    }
+
+    const handleBlur = (e) => {
+        e.target.style.borderColor = inputBorder
+        e.target.style.boxShadow = 'none'
+        e.target.style.background = inputBg
+        e.target.style.color = '#ffffff'
     }
 
     return (
@@ -110,7 +119,6 @@ function Auth({ isModel = false }) {
             className={`w-full ${isModel ? "py-4" : "min-h-screen flex items-center justify-center px-6 py-16"}`}
             style={!isModel ? { background: 'linear-gradient(135deg, #05050f 0%, #0a0a1a 50%, #080818 100%)' } : {}}
         >
-            {/* ── Full-page background effects (unchanged) ── */}
             {!isModel && (
                 <>
                     <div className='fixed inset-0 pointer-events-none' style={{
@@ -133,7 +141,6 @@ function Auth({ isModel = false }) {
                 </>
             )}
 
-            {/* ── Card ── */}
             <motion.div
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -145,7 +152,6 @@ function Auth({ isModel = false }) {
                     boxShadow: '0 0 0 1px rgba(99,102,241,0.08), 0 40px 100px rgba(0,0,0,0.8)',
                 } : {}}
             >
-                {/* Top glow line */}
                 {!isModel && (
                     <div style={{
                         position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px',
@@ -153,7 +159,6 @@ function Auth({ isModel = false }) {
                     }} />
                 )}
 
-                {/* Logo row */}
                 <div className='flex items-center justify-center gap-3 mb-6'>
                     <motion.div
                         animate={{ rotate: [0, 10, -10, 0] }}
@@ -166,7 +171,6 @@ function Auth({ isModel = false }) {
                     <h2 className='font-bold text-lg' style={{ color: textPrimary }}>MockMentor</h2>
                 </div>
 
-                {/* Headline */}
                 <h1 className='text-2xl font-bold text-center leading-snug mb-2' style={{ color: textPrimary, letterSpacing: '-0.4px' }}>
                     {mode === 'login' ? 'Welcome back' : 'Create your account'}
                     {' '}
@@ -183,7 +187,6 @@ function Auth({ isModel = false }) {
                         : 'Join thousands who are acing their interviews with AI.'}
                 </p>
 
-                {/* ── Login / Signup tab toggle ── */}
                 <div
                     className='flex rounded-2xl p-1 mb-6 gap-1'
                     style={{ background: isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)', border: `1px solid ${borderBase}` }}
@@ -207,7 +210,6 @@ function Auth({ isModel = false }) {
                     ))}
                 </div>
 
-                {/* ── Google button ── */}
                 <motion.button
                     onClick={handleGoogleAuth}
                     disabled={loading}
@@ -244,7 +246,6 @@ function Auth({ isModel = false }) {
                     <span className='relative z-10'>Continue with Google</span>
                 </motion.button>
 
-                {/* ── Divider ── */}
                 <div className='flex items-center gap-3 mb-5'>
                     <div className='flex-1 h-px' style={{ background: isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.07)' }} />
                     <span className='text-xs font-medium' style={{ color: isLight ? '#9ca3af' : 'rgba(255,255,255,0.22)' }}>
@@ -253,10 +254,8 @@ function Auth({ isModel = false }) {
                     <div className='flex-1 h-px' style={{ background: isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.07)' }} />
                 </div>
 
-                {/* ── Email/password form ── */}
                 <form onSubmit={handleEmailAuth} className='space-y-4' autoComplete="off">
 
-                    {/* Name — signup only, animated in/out */}
                     <AnimatePresence initial={false}>
                         {mode === 'signup' && (
                             <motion.div
@@ -279,8 +278,8 @@ function Auth({ isModel = false }) {
                                             type='text' name='name' value={form.name}
                                             onChange={handleChange} placeholder='John Doe'
                                             style={inputStyle}
-                                            onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)'; e.target.style.background = 'rgba(99,102,241,0.07)' }}
-                                            onBlur={e => { e.target.style.borderColor = inputBorder; e.target.style.boxShadow = 'none'; e.target.style.background = inputBg }}
+                                            onFocus={handleFocus}
+                                            onBlur={handleBlur}
                                         />
                                     </div>
                                 </div>
@@ -288,7 +287,6 @@ function Auth({ isModel = false }) {
                         )}
                     </AnimatePresence>
 
-                    {/* Email */}
                     <div>
                         <label className='block text-xs font-semibold uppercase tracking-widest mb-1.5'
                             style={{ color: labelCol }}>
@@ -301,13 +299,12 @@ function Auth({ isModel = false }) {
                                 type='email' name='email' value={form.email}
                                 onChange={handleChange} placeholder='you@example.com'
                                 style={inputStyle}
-                                onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)'; e.target.style.background = 'rgba(99,102,241,0.07)' }}
-                                onBlur={e => { e.target.style.borderColor = inputBorder; e.target.style.boxShadow = 'none'; e.target.style.background = inputBg }}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
                             />
                         </div>
                     </div>
 
-                    {/* Password */}
                     <div>
                         <label className='block text-xs font-semibold uppercase tracking-widest mb-1.5'
                             style={{ color: labelCol }}>
@@ -320,8 +317,8 @@ function Auth({ isModel = false }) {
                                 type={showPassword ? 'text' : 'password'} name='password' value={form.password}
                                 onChange={handleChange} placeholder='Min. 6 characters'
                                 style={{ ...inputStyle, paddingRight: '40px' }}
-                                onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)'; e.target.style.background = 'rgba(99,102,241,0.07)' }}
-                                onBlur={e => { e.target.style.borderColor = inputBorder; e.target.style.boxShadow = 'none'; e.target.style.background = inputBg }}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
                             />
                             <button type='button' onClick={() => setShowPassword(p => !p)}
                                 className='absolute right-3 top-1/2 -translate-y-1/2 transition-colors'
@@ -331,7 +328,6 @@ function Auth({ isModel = false }) {
                         </div>
                     </div>
 
-                    {/* Error toast */}
                     <AnimatePresence>
                         {error && (
                             <motion.div
@@ -352,7 +348,6 @@ function Auth({ isModel = false }) {
                         )}
                     </AnimatePresence>
 
-                    {/* Submit */}
                     <motion.button
                         type='submit'
                         disabled={loading}
@@ -391,7 +386,6 @@ function Auth({ isModel = false }) {
                     </motion.button>
                 </form>
 
-                {/* Switch mode link */}
                 <p className='text-center text-xs mt-5' style={{ color: isLight ? '#9ca3af' : 'rgba(255,255,255,0.28)' }}>
                     {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
                     <button
