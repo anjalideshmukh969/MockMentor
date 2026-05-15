@@ -11,9 +11,7 @@ import InterviewHistory from './pages/InterviewHistory'
 import Pricing from './pages/Pricing'
 import InterviewReport from './pages/InterviewReport'
 
-//server url
-export const ServerUrl  = "https://mockmentor-uvh8.onrender.com"
-
+import { ServerUrl } from "./config/config";
 function App() {
 
   const dispatch = useDispatch()
