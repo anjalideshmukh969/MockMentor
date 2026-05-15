@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from "axios"
-import { ServerUrl } from '../App'
+import { ServerUrl } from '../config/config'
 import { motion } from "motion/react"
 import { BsRobot } from 'react-icons/bs'
 import Step3Report from '../components/Step3Report'

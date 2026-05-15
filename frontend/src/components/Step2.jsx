@@ -6,7 +6,7 @@ import Timer from './Timer'
 import { FaMicrophone, FaMicrophoneSlash } from "react-icons/fa"
 import { BsArrowRight, BsRobot } from 'react-icons/bs'
 import axios from "axios"
-import { ServerUrl } from '../App'
+import { ServerUrl } from '../config/config'
 
 function Step2({ interviewData, onFinish }) {
     const { interviewId, questions, userName } = interviewData

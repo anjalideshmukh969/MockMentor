@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
-import { ServerUrl } from '../App'
+import { ServerUrl } from '../config/config'
 import { motion } from "motion/react"
 import { FaArrowLeft, FaCalendarAlt, FaChartLine, FaClock, FaStar } from 'react-icons/fa'
 import { BsRobot, BsLightningCharge } from "react-icons/bs"

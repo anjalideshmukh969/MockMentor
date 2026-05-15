@@ -8,7 +8,7 @@ import { FaUserAstronaut } from "react-icons/fa"
 import { MdWorkspacePremium } from "react-icons/md"
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { ServerUrl } from '../App'
+import { ServerUrl } from '../config/config'
 import { setUserData } from '../redux/userSlice'
 import AuthModel from './AuthModel'
 

@@ -4,7 +4,7 @@ import { BsRobot } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import axios from 'axios'
-import { ServerUrl } from '../App'
+import { ServerUrl } from '../config/config'
 import { useDispatch } from 'react-redux'
 import { setUserData } from '../redux/userSlice'
 

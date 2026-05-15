@@ -6,7 +6,7 @@ import {
 } from "react-icons/fa"
 import { BsRobot, BsCheckCircleFill } from "react-icons/bs"
 import axios from "axios"
-import { ServerUrl } from '../App'
+import { ServerUrl } from '../config/config'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserData } from '../redux/userSlice.js'
 
