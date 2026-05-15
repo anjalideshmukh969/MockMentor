@@ -196,7 +196,6 @@ function Step1({ onStart }) {
                         {/* Experience input */}
                         <div className='relative'>
                             <FaBriefcase className='absolute top-4 left-4' style={{ color: 'rgba(129,140,248,0.6)' }} />
-
                             <select
                                 value={experience}
                                 onChange={(e) => setExperience(e.target.value)}
