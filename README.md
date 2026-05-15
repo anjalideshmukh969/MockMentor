@@ -1,174 +1,179 @@
 # 🤖 MockMentor — AI-Powered Mock Interview Platform
 
-MockMentor is an AI-powered mock interview platform designed to help students and job seekers prepare for technical and HR interviews through realistic interview simulations, AI-generated personalized questions, and intelligent performance feedback.
+MockMentor is a full-stack AI-powered interview preparation platform designed to help students and job seekers practice real-world technical and HR interviews through personalized interview simulations, resume-based question generation, and intelligent AI feedback.
 
-The platform aims to bridge the gap between academic preparation and real-world interview experience by providing an interactive and personalized interview environment.
-
----
-
-## 🚀 Features
-
-- 📄 Resume Upload & Analysis (PDF)
-- 🤖 AI-Generated Personalized Interview Questions
-- 🧠 Technical + HR Interview Simulation
-- 📊 AI-Powered Performance Feedback
-- 🔐 Secure Google Authentication with Firebase
-- 💳 Credit-Based Usage System
-- 💰 Razorpay Payment Integration
-- 🎨 Smooth Animations with Framer Motion
-- 📱 Fully Responsive Modern UI
+The platform creates an interactive interview environment where users can improve confidence, communication, and problem-solving skills before actual placements and job interviews.
 
 ---
 
-## 🧠 Problem Statement
+# 🚀 Key Features
 
-Many students struggle with interview preparation due to:
-- Lack of real interview exposure
-- Limited personalized guidance
-- No structured feedback mechanism
-- Low confidence during placements
-
-Traditional preparation methods often fail to simulate real interview scenarios effectively.
-
----
-
-## 💡 Solution
-
-MockMentor provides a realistic AI-driven interview preparation experience where users can:
-- Upload resumes
-- Generate personalized interview questions
-- Practice technical and HR interviews
-- Receive intelligent feedback and improvement suggestions
-
-The platform helps users improve communication skills, technical understanding, and interview confidence.
+* 🤖 AI-generated interview questions
+* 📄 Resume-based personalized interview flow
+* 🧠 Technical & HR interview simulations
+* 📊 AI-powered interview feedback and evaluation
+* 📚 Interview history tracking
+* 🔐 Secure Google Authentication with Firebase
+* 💳 Credit-based interview system
+* 💰 Razorpay payment integration
+* 📥 PDF resume upload support
+* ⚡ Fast and responsive user experience
+* 🎨 Modern UI with smooth animations using Framer Motion
+* 📱 Fully responsive across devices
 
 ---
 
-## 🛠️ Tech Stack
+# 🧠 What Problem Does It Solve?
 
-### 💻 Frontend
-- React.js
-- Tailwind CSS
-- Framer Motion
+Many students struggle with interview preparation because of:
 
-### ⚙️ Backend
-- Node.js
-- Express.js
+* lack of real interview exposure
+* absence of personalized guidance
+* limited feedback mechanisms
+* low confidence during placements
 
-### 🗄️ Database
-- MongoDB
-
-### 🔐 Authentication
-- Firebase Authentication (Google Sign-In)
-
-### 🤖 AI Integration
-- OpenAI API / Gemini API
-
-### 💳 Payment Gateway
-- Razorpay
-
-### 🚀 Deployment
-- Render
+MockMentor solves this by providing a realistic AI-driven mock interview experience tailored to individual resumes and career goals.
 
 ---
 
-# ⚙️ Installation & Setup
+# 🛠️ Tech Stack
 
-## 1️⃣ Clone the Repository
+## Frontend
 
-```bash
-git clone https://github.com/your-username/MockMentor.git
-```
+* React.js
+* Vite
+* Tailwind CSS
+* Redux Toolkit
+* Framer Motion
+* Axios
 
----
+## Backend
 
-## 2️⃣ Navigate to Project Directory
+* Node.js
+* Express.js
 
-```bash
-cd MockMentor
-```
+## Database
 
----
+* MongoDB Atlas
 
-## 3️⃣ Install Frontend Dependencies
+## Authentication
 
-```bash
-npm install
-```
+* Firebase Authentication (Google Sign-In)
 
----
+## AI Integration
 
-## 4️⃣ Setup Environment Variables
+* Gemini API / OpenAI API
 
-Create a `.env` file in the root directory and add:
+## Payments
 
-```env
-MONGODB_URI=your_mongodb_uri
-FIREBASE_API_KEY=your_firebase_key
-OPENAI_API_KEY=your_openai_key
-RAZORPAY_KEY_ID=your_razorpay_key
-RAZORPAY_SECRET=your_razorpay_secret
-```
+* Razorpay
 
----
+## Deployment
 
-## 5️⃣ Start Development Server
-
-```bash
-npm run dev
-```
+* Vercel (Frontend)
+* Render (Backend)
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```bash
 MockMentor/
 │
-├── client/          # Frontend
-├── server/          # Backend
+├── frontend/       # React + Vite frontend
+├── backend/        # Node + Express backend
 └── README.md
 ```
 
 ---
 
-## 📸 Screenshots
+# ⚙️ Environment Variables
 
-_Add project screenshots here._
+## Frontend (`frontend/.env`)
 
----
-
-## 🎯 Future Improvements
-
-- 🎙️ Voice-Based AI Interviews
-- 📹 Video Interview Simulation
-- 📈 Performance Analytics Dashboard
-- 🌍 Multi-Language Support
-- 🧑‍💼 Company-Specific Interview Preparation
-- 🏆 Gamification & Leaderboards
+```env
+VITE_API_URL=your_backend_url
+VITE_FIREBASE_APIKEY=your_firebase_key
+VITE_RAZORPAY_KEY_ID=your_razorpay_key
+```
 
 ---
 
-## 🤝 Contributing
+## Backend (`backend/.env`)
 
-Contributions are welcome!
-
-1. Fork the repository
-2. Create a new branch
-3. Commit your changes
-4. Push the branch
-5. Open a Pull Request
+```env
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+CLIENT_URL=your_frontend_url
+```
 
 ---
 
-## 📄 License
+# ⚙️ Local Setup
 
-This project is licensed under the MIT License.
+## Clone Repository
+
+```bash
+git clone https://github.com/your-username/MockMentor.git
+cd MockMentor
+```
 
 ---
 
-## 👨‍💻 Author
+## Backend Setup
 
-Developed with ❤️ by **Anjali Deshmukh**
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+Backend runs on:
+
+```bash
+http://localhost:5000
+```
 
 ---
+
+## Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+# 🌐 Deployment
+
+| Service  | Platform      |
+| -------- | ------------- |
+| Frontend | Vercel        |
+| Backend  | Render        |
+| Database | MongoDB Atlas |
+
+---
+
+
+# 🎯 Future Enhancements
+
+* 🎙️ Voice-based AI interviews
+* 📹 Real-time video interview simulation
+* 📈 Advanced performance analytics
+* 🌍 Multi-language interview support
+* 🧑‍💼 Company-specific interview preparation
+* 🏆 Gamification and leaderboards
+
+---
+
+# 👩‍💻 Author
+
+**Anjali Deshmukh**
