@@ -39,7 +39,7 @@ function Step1({ onStart }) {
             setAnalysisDone(true)
             setAnalyzing(false)
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
             setAnalyzing(false)
         }
     }
@@ -58,7 +58,7 @@ function Step1({ onStart }) {
             setLoading(false)
             onStart(result.data)
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
             setLoading(false)
         }
     }
