@@ -80,16 +80,13 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-
         if (!email || !password) {
             return res.status(400).json({ message: "Email and password are required." })
         }
-
         const user = await User.findOne({ email })
         if (!user) {
             return res.status(401).json({ message: "Invalid email or password." })
         }
-
         // Users who signed up via Google won't have a password field
         if (!user.password) {
             return res.status(401).json({ message: "This account uses Google Sign-In. Please continue with Google." })
@@ -103,8 +100,8 @@ export const login = async (req, res) => {
         const token = await genToken(user._id)
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "strict",
+            secure: true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
