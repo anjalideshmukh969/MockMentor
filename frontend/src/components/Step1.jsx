@@ -190,7 +190,7 @@ function Step1({ onStart }) {
                                 }}
                                 onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.6)'; e.target.style.background = 'rgba(99,102,241,0.07)'; e.target.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)' }}
                                 onBlur={e => { e.target.style.borderColor = 'rgba(99,102,241,0.2)'; e.target.style.background = 'rgba(255,255,255,0.04)'; e.target.style.boxShadow = 'none' }}
-                                />
+                            />
                         </div>
 
                         {/* Experience input */}
