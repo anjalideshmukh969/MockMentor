@@ -114,7 +114,7 @@ CLIENT_URL=your_frontend_url
 ## Clone Repository
 
 ```bash
-git clone https://github.com/your-username/MockMentor.git
+git clone https://github.com/anjalideshmukh969/MockMentor.git
 cd MockMentor
 ```
 
