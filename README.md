@@ -41,7 +41,6 @@ MockMentor solves this by providing a realistic AI-driven mock interview experie
 ## Frontend
 
 * React.js
-* Vite
 * Tailwind CSS
 * Redux Toolkit
 * Framer Motion
@@ -58,11 +57,11 @@ MockMentor solves this by providing a realistic AI-driven mock interview experie
 
 ## Authentication
 
-* Firebase Authentication (Google Sign-In)
+* Firebase Authentication (Google OAuth)
 
 ## AI Integration
 
-* Gemini API / OpenAI API
+* OpenAI API
 
 ## Payments
 
