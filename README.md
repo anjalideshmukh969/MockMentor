@@ -26,10 +26,11 @@ The platform creates an interactive interview environment where users can improv
 
 Many students struggle with interview preparation because of:
 
-* lack of real interview exposure
-* absence of personalized guidance
-* limited feedback mechanisms
-* low confidence during placements
+* lack of real interview exposure.
+* absence of personalized guidance.
+* limited feedback mechanisms.
+* low confidence during placements.
+* 
 
 MockMentor solves this by providing a realistic AI-driven mock interview experience tailored to individual resumes and career goals.
 
