@@ -1,0 +1,21 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+python-dotenv
+
+# Phase 1 — add when ready
+# openai-whisper
+# spacy
+
+# Phase 2 — add when ready
+# deepface
+# opencv-python
+
+# Phase 3 — add when ready
+# sentence-transformers
+
+# Phase 4 — add when ready
+# scikit-learn
+# pandas
+# numpy
