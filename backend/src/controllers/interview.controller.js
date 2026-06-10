@@ -15,7 +15,10 @@ export const analyzeResume = async (req, res) => {
     const fileBuffer = await fs.promises.readFile(filepath)
     const uint8Array = new Uint8Array(fileBuffer)
 
-    const pdf = await pdfjsLib.getDocument({ data: uint8Array }).promise;
+    const pdf = await pdfjsLib.getDocument({
+      data: uint8Array,
+      disableWorker: true
+    }).promise;
 
     let resumeText = "";
 
@@ -55,7 +58,9 @@ Return strictly JSON:
 
     const aiResponse = await askAi(messages)
 
-    const parsed = JSON.parse(aiResponse);
+    // const parsed = JSON.parse(aiResponse);
+    const cleaned = aiResponse.replace(/```json|```/g, "").trim();
+    const parsed = JSON.parse(cleaned);
 
     fs.unlinkSync(filepath)
 

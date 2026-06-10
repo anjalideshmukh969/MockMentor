@@ -7,7 +7,6 @@ import authRouter from "./src/routes/auth.routes.js";
 import userRouter from "./src/routes/user.routes.js";
 import interviewRouter from "./src/routes/interview.routes.js";
 
-
 dotenv.config();
 const app = express();
 
