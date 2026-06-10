@@ -17,7 +17,6 @@ The platform creates an interactive interview environment where users can improv
 * 💳 Credit-based interview system
 * 💰 Razorpay payment integration
 * 📥 PDF resume upload support
-* ⚡ Fast and responsive user experience
 * 🎨 Modern UI with smooth animations using Framer Motion
 * 📱 Fully responsive across devices
 
@@ -27,10 +26,11 @@ The platform creates an interactive interview environment where users can improv
 
 Many students struggle with interview preparation because of:
 
-* lack of real interview exposure
-* absence of personalized guidance
-* limited feedback mechanisms
-* low confidence during placements
+* lack of real interview exposure.
+* absence of personalized guidance.
+* limited feedback mechanisms.
+* low confidence during placements.
+* 
 
 MockMentor solves this by providing a realistic AI-driven mock interview experience tailored to individual resumes and career goals.
 
@@ -41,7 +41,6 @@ MockMentor solves this by providing a realistic AI-driven mock interview experie
 ## Frontend
 
 * React.js
-* Vite
 * Tailwind CSS
 * Redux Toolkit
 * Framer Motion
@@ -58,11 +57,11 @@ MockMentor solves this by providing a realistic AI-driven mock interview experie
 
 ## Authentication
 
-* Firebase Authentication (Google Sign-In)
+* Firebase Authentication (Google OAuth)
 
 ## AI Integration
 
-* Gemini API / OpenAI API
+* OpenAI API
 
 ## Payments
 
@@ -114,7 +113,7 @@ CLIENT_URL=your_frontend_url
 ## Clone Repository
 
 ```bash
-git clone https://github.com/your-username/MockMentor.git
+git clone https://github.com/anjalideshmukh969/MockMentor.git
 cd MockMentor
 ```
 
