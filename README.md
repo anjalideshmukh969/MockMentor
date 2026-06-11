@@ -18,7 +18,7 @@ The platform creates an interactive interview environment where users can improv
 * 💰 Razorpay payment integration
 * 📥 PDF resume upload support
 * 🎨 Modern UI with smooth animations using Framer Motion
-* 📱 Fully responsive across devices
+* 📱 Fully responsive across devices.
 
 ---
 
