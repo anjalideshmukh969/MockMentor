@@ -46,21 +46,11 @@ MockMentor solves this by providing a realistic AI-driven mock interview experie
 * Framer Motion
 * Axios
 
-## Backend
+## Backend & Database
 
 * Node.js
 * Express.js
-
-## Database
-
 * MongoDB Atlas
-
-## Authentication
-
-* Firebase Authentication (Google OAuth)
-
-## AI Integration
-
 * OpenAI API
 
 ## Payments
